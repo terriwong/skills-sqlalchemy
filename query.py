@@ -83,11 +83,39 @@ def get_brands_summary():
 
 # Part 2.5: Advanced and Optional
 def search_brands_by_name(mystr):
-    pass
+
+    results = Brand.query.filter((Brand.name.like('%mystr%')) | (Brand.name == mystr)).all()
+
+    result_list = []
+
+    for item in results:
+        obj = {}
+        obj['id'] = obj.id
+        obj['brand name'] = obj.name
+        obj['founded'] = obj.founded
+        obj['headquarters'] = obj.headquarters
+        obj['discontinued'] = obj.discontinued
+        result_list.append(obj)
+
+    return result_list
 
 
 def get_models_between(start_year, end_year):
-    pass
+
+    results = Model.query.filter(Model.year > start_year, Model.year < end_year).all()
+
+    result_list = []
+
+    for item in results:
+        obj = {}
+        obj['id'] = obj.id
+        obj['year'] = obj.year
+        obj['name'] = obj.name
+        obj['brand_name'] = obj.brand_name
+        result_list.append(obj)
+
+    return result_list
+
 
 # -------------------------------------------------------------------
 
